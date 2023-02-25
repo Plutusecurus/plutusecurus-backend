@@ -64,11 +64,34 @@ userRouter.post(
 
             if (!existingUser) return res.status(404).json({ code: 404, success: false, message: "User not found" });
 
-            existingUser.spending[category] = Number(amount);
+            existingUser.spending[category] = existingUser.spending[category] + Number(amount);
 
             await existingUser.save();
 
             return res.status(200).json({ code: 200, success: true, message: "Expense added successfully" });
+
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ code: 500, success: false, message: "Internal Server Error" });
+        }
+    }
+);
+
+userRouter.post(
+    '/add-income',
+    async (req, res) => {
+        try {
+            const { address, amount } = req.body;
+
+            const existingUser = await User.findOne({ account: address });
+
+            if (!existingUser) return res.status(404).json({ code: 404, success: false, message: "User not found" });
+
+            existingUser.earning = existingUser.earning + Number(amount);
+
+            await existingUser.save();
+
+            return res.status(200).json({ code: 200, success: true, message: "Income added successfully" });
 
         } catch (error) {
             console.error(error);
