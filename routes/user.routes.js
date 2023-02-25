@@ -78,7 +78,7 @@ userRouter.post(
 );
 
 userRouter.post(
-    '/pay',
+    '/deposit',
     (req, res) => {
         const { sender, privateKey, recipient } = req.body;
         // const contract = new web3.eth.Contract(contractAbi, contractAddress);
@@ -123,6 +123,61 @@ userRouter.post(
             console.log('Transaction Hash: ', transaction.hash)
         }).catch(error => {
             console.log('Error: ', error);
+        });
+
+        // console.log(result);
+    }
+);
+
+userRouter.post(
+    '/transfer',
+    async (req, res) => {
+        // const { sender, privateKey, recipient } = req.body;
+        // const contract = new web3.eth.Contract(contractAbi, contractAddress);
+
+        // const gasPrice = await web3.eth.getGasPrice();
+        // const gasLimit = 300000;
+
+        // const value = web3.utils.toWei('0.001', 'ether');
+
+        // const txObject = {
+        //     from: contractAddress, // replace with the sender address
+        //     value: value,
+        //     gas: gasLimit, // replace with the gas limit
+        //     gasPrice: gasPrice // replace with the gas price
+        // };
+
+        // const transferTx = contract.methods.transferETH(recipient, value).send(txObject).on('transactionHash', function (hash) {
+        //     console.log(hash)
+        // }).on('receipt', function (receipt) {
+        //     console.log('Receipt:', receipt);
+        // })
+        //     .on('error', function (error) {
+        //         console.error('Error:', error);
+        //     });
+
+        // // console.log(receipt);
+
+        // return res.status(200).json({ code: 200, message: "Transaction Successful" });
+
+        const { sender, privateKey, recipient } = req.body;
+
+        const provider = new ethers.providers.JsonRpcProvider(rpc_provider);
+        const wallet = new ethers.Wallet(privateKey, provider);
+        // const signer = wallet.provider.getSigner(wallet.address);
+        const contract = new ethers.Contract(contractAddress, contractAbi, wallet);
+
+        const amount = ethers.utils.parseEther('0.001');
+        const overrides = {
+            gasLimit: 300000
+        }
+        // const options = { value: amount };
+        contract.transferETH(recipient, amount, overrides).then(transaction => {
+            console.log('Transaction Hash: ', transaction.hash)
+            return res.status(200).json({ code: 200, success: true, message: "Transaction Successful" });
+        }).catch(error => {
+            console.log('Error: ', error);
+            return res.status(500).json({ code: 500, success: false, message: "Something Went Wrong" });
         });
 
         // console.log(result);

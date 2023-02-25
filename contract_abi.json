@@ -9,7 +9,7 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address payable",
+				"internalType": "address",
 				"name": "_recipient",
 				"type": "address"
 			},
