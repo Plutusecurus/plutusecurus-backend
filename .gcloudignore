@@ -1,6 +1,0 @@
-# This file specifies files that are *not* uploaded to Google Cloud Platform
-# using gcloud. It follows the same syntax as .gitignore, with the addition of
-.gcloudignore
-
-# Node.js dependencies:
-node_modules/
