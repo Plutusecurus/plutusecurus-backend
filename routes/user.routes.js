@@ -20,7 +20,7 @@ var upload = multer({ storage: storage });
 
 var zeeve_api_key = String(process.env.ZEEVE_API_KEY);
 
-var rpc_provider = `https://app.zeeve.io/shared-api/poly/${zeeve_api_key}/`;
+var rpc_provider = `https://goerli.infura.io/v3/4a7302b6499a467dbd30df6be95a6df3`;
 var web3Provider = new Web3.providers.HttpProvider(rpc_provider);
 var web3 = new Web3(web3Provider);
 
