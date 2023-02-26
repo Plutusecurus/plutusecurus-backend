@@ -18,9 +18,9 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-var rpc_api_key = String(process.env.RPC_API_KEY);
+var zeeve_api_key = String(process.env.ZEEVE_API_KEY);
 
-var rpc_provider = `https://goerli.infura.io/v3/4a7302b6499a467dbd30df6be95a6df3`;
+var rpc_provider = `https://app.zeeve.io/shared-api/poly/${zeeve_api_key}/`;
 var web3Provider = new Web3.providers.HttpProvider(rpc_provider);
 var web3 = new Web3(web3Provider);
 
@@ -108,36 +108,6 @@ userRouter.post(
     '/deposit',
     (req, res) => {
         const { sender, privateKey, recipient, amount } = req.body;
-        // const contract = new web3.eth.Contract(contractAbi, contractAddress);
-
-        // const gasPrice = await web3.eth.getGasPrice();
-
-        // console.log("Gas Price: ", gasPrice)
-
-        // const value = web3.utils.toHex(web3.utils.toWei(amount.toString(), 'ether'));
-
-        // const txObject = {
-        //     from: String(sender), // replace with the sender address
-        //     to: contractAddress,
-        //     value: value,
-        //     gas: web3.utils.toWei("0.5", 'ether'), // replace with the gas limit
-        //     gasPrice: web3.utils.toWei("0.00000000000000001", 'ether') // replace with the gas price
-        // };
-
-        // const signedTransaction = await web3.eth.accounts.signTransaction(txObject, privateKey);
-
-        // contract.methods.depositETH().send(txObject).on('transactionHash', function (hash) {
-        //     console.log(hash)
-        // }).on('receipt', function (receipt) {
-        //     console.log('Receipt:', receipt);
-        // })
-        //     .on('error', function (error) {
-        //         console.error('Error:', error);
-        //     });
-
-        // // console.log(receipt);
-
-        // return res.status(200).json({ code: 200, message: "Transaction Successful" });
 
         const provider = new ethers.providers.JsonRpcProvider(rpc_provider);
         const wallet = new ethers.Wallet(privateKey, provider);
@@ -164,33 +134,6 @@ userRouter.post(
 userRouter.post(
     '/transfer',
     async (req, res) => {
-        // const { sender, privateKey, recipient } = req.body;
-        // const contract = new web3.eth.Contract(contractAbi, contractAddress);
-
-        // const gasPrice = await web3.eth.getGasPrice();
-        // const gasLimit = 300000;
-
-        // const value = web3.utils.toWei('0.001', 'ether');
-
-        // const txObject = {
-        //     from: contractAddress, // replace with the sender address
-        //     value: value,
-        //     gas: gasLimit, // replace with the gas limit
-        //     gasPrice: gasPrice // replace with the gas price
-        // };
-
-        // const transferTx = contract.methods.transferETH(recipient, value).send(txObject).on('transactionHash', function (hash) {
-        //     console.log(hash)
-        // }).on('receipt', function (receipt) {
-        //     console.log('Receipt:', receipt);
-        // })
-        //     .on('error', function (error) {
-        //         console.error('Error:', error);
-        //     });
-
-        // // console.log(receipt);
-
-        // return res.status(200).json({ code: 200, message: "Transaction Successful" });
 
         const { sender, privateKey, recipient, amount } = req.body;
 
