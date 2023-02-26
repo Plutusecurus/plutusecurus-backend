@@ -38,6 +38,10 @@ userRouter.post(
             const imageUrl = `data:${req.file.mimetype};base64,${encodedImg}`
             const { name, account } = req.body;
 
+            const existingUser = await User.findOne({ account: account });
+
+            if (existingUser) return res.status(400).json({ code: 400, message: "This User already exists" });
+
             const newUser = await User.create({
                 profilePic: imageUrl,
                 name: name,
