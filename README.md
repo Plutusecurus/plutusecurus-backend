@@ -43,6 +43,26 @@ This repository contains all the backend logic of the application. Built using *
   md uploads
   ```
 
+  Alternatively, you can pull the Docker image from DockerHub:
+
+  ```bash
+  docker pull sayantandasgupta/plutusecurus
+  ```
+
+  And run it by using the command:
+
+  ```bash
+  docker run -p 8000:3000 -d sayantandasgupta/plutusecurus
+  ```
+
+  This makes the container run in detached mode. You can check if it is running by using the curl command to make a request to localhost:8000
+
+  ```
+  curl -i localhost:8000
+  ```
+
+  If this doesn't give an error, then you have installed the docker image correctly.
+
 ## 💭 Features
 
 Daily Payment and Expense Tracker using DeFi
