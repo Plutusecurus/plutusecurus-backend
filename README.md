@@ -17,6 +17,9 @@ It is a daily financial planner cum ethereum wallet which helps users to:
 This repository contains all the backend logic of the application. Built using *Node.js*, *Express.js* and *Javascript*.
 
 ## 📃 Getting Started
+
+  #### Install using Source
+
   *Clone the Repository*
   
   ```bash
@@ -42,6 +45,8 @@ This repository contains all the backend logic of the application. Built using *
   ```bash
   md uploads
   ```
+
+  #### Install using Docker
 
   Alternatively, you can pull the Docker image from DockerHub:
 
