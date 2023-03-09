@@ -6,7 +6,7 @@ Welcome to our Diversion project repository! This repository contains the code, 
 
 ## ⭐ Project Description
 
-Plutusecurus is an all-in-one finance solution based on Polygon for all your online and offline payments. 
+Plutusecurus is an all-in-one finance solution based on Polygon for all your online payments. 
 
 It is a daily financial planner cum ethereum wallet which helps users to:
 * Have a one stop solution to all their payment issues built on WEB3
